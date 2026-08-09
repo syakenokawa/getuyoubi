@@ -1,138 +1,126 @@
-#include<iostream>
-#include<cstdlib>
-#include<ctime>
+#include <iostream>
+#include <cstdlib>
+#include <ctime>
+
 using namespace std;
 
-int main(void)
+int main()
 {
-	const int CARD = 3;
-	const int CARD_NUMBER = 10;
+    int board[9];
+    int dice1, dice2;
+    int choice;
+    bool turnFlag = true;
 
-	int i, hit = 0;
-	int playerCard[CARD];
-	int enemyCard[CARD];
-	int plyChoice[CARD];
-	int emyChoice[CARD];
+    srand((unsigned int)time(NULL));
 
-	bool trunFlag = true;
-	bool judgementFlag = false;
+    
+    for (int i = 0; i < 9; i++)
+    {
+        board[i] = 0;
+    }
+    //サイコロの戦い
+    while (true)
+    {
+        if (turnFlag)
+        {
+            cout << "PLAYERのターン" << endl;
 
-	srand((unsigned int)time(NULL));
+            dice1 = rand() % 6 + 1;
+            dice2 = rand() % 6 + 1;
 
-	for (i = 0; i < CARD; i++)
-	{
-		playerCard[i] = rand() % CARD_NUMBER;
-		enemyCard[i] = rand() % CARD_NUMBER;
-	}
-	cout << "===================   Hit & Blow   ============================" << "\n";
-	cout << "3マスの数字あてゲームプレイヤーとCPUが、お互いに隠し持った3つの数字を当てるターン制のゲーム" << "\n";
-	cout << "あなたの配られてカードは," << "\n";
+            cout << "サイコロ1" << dice1 << endl;
+            cout << "サイコロ2" << dice2 << endl;
+            cout << "合計" << dice1 + dice2 << endl;
 
-	for (i = 0; i < CARD; i++)
-	{
-		cout << i + 1 << "番目" << playerCard[i] << "\n";
-	}
+            cout << "取る数字を入力(1～9)";
+            cin >> choice;
 
-	cout << "===================   GAME STRAT   ============================" << "\n";
+            choice--;
 
-	while (true)
-	{
+            if (board[choice] == 0)
+            {
+                board[choice] = 1;
+                cout << choice + 1 << "を取りました。" << endl;
+                turnFlag = false;
+            }
+            else
+            {
+                cout << "その数字は取られています。" << endl;
+            }
+        }
+        else
+        {
+            cout << "CPUのターン" << endl;
 
-		if (trunFlag)
-		{
+            dice1 = rand() % 6 + 1;
+            dice2 = rand() % 6 + 1;
 
-			hit = 0;
-			cout << "PLAYER TRUN 「数字の0から9までの数字を3つ選んでください」\n";
-			for (i = 0; i < CARD; i++)
-			{
-				while (true)
-				{
-					cin >> plyChoice[i];
-					if (0 > plyChoice[i] || 9 < plyChoice[i])
-					{
-						cout << "入力に誤りがあります。再度入力してください。\n";
-					}
-					else
-					{
-						break;
-					}
+            cout << "サイコロ1" << dice1 << endl;
+            cout << "サイコロ2" << dice2 << endl;
+            cout << "合計" << dice1 + dice2 << endl;
 
-				}
-			}
+            if (board[dice1 - 1] == 0)
+            {
+                board[dice1 - 1] = 2;
+                cout << "CPUはを取りました。" << dice1  << endl;
+            }
+            else if (board[dice2 - 1] == 0)
+            {
+                board[dice2 - 1] = 2;
+                cout << "CPUはを取りました。" << dice2 << endl;
+            }
+            else if (dice1 + dice2 <= 9 && board[dice1 + dice2 - 1] == 0)
+            {
+                board[dice1 + dice2 - 1] = 2;
+                cout << "CPUはを取りました。" << dice1 + dice2  << endl;
+            }
+            else
+            {
+                cout << "CPUは取れる数字がありません。" << endl;
+                break;
+            }
 
+            turnFlag = true;
+        }
+    }
 
-			for (i = 0; i < CARD; i++)
-			{
-				if (plyChoice[i] == enemyCard[i])
-				{
-					cout << "Hit,";
-					hit++;
-				}
-				else
-				{
-					cout << "Blow,";
-				}
-			}
-			cout << "\n";
-			if (hit == 3)
-			{
-				cout << "3Hit!!\n";
-				judgementFlag = true;
-				break;
-			}
-
-			cout << "\n";
-			trunFlag = false;
-		}
-		else
-		{
-			hit = 0;
-
-			cout << "ENEMY TRUN \n";
-			for (i = 0; i < CARD; i++)
-			{
-				emyChoice[i] = rand() % CARD_NUMBER;
-
-				cout << i + 1 << "番目" << emyChoice[i] << "\n";
-			}
-
-			for (i = 0; i < CARD; i++)
-			{
-				if (emyChoice[i] == playerCard[i])
-				{
-					cout << "Hit,";
-					hit++;
-				}
-				else
-				{
-					cout << "Blow,";
-				}
-			}
-			cout << "\n";
-			if (hit == 3)
-			{
-				cout << "3Hit!!\n";
-				break;
-			}
-
-			cout << "\n";
-			trunFlag = true;
-		}
-
-
-	}
-
-	if (judgementFlag)
-	{
-		cout << "PLAYER WINNER\n";
-	}
-	else
-	{
-		cout << "ENEMY WINNER\n";
-	}
-
-	return 0;
+    return 0;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
