@@ -1,5 +1,5 @@
 #include "CPU.h"
-
+#include<iostream>
 using namespace std;
 
 CPU::CPU()
@@ -19,7 +19,7 @@ int CPU::GetTotal()
 
 void CPU::ShowStatus()
 {
-	cout << "CPU‚Ì‡Œv:" << total << endl;
+	cout << "CPU‚Ì‡Œv" << total << endl;
 
 }
 
