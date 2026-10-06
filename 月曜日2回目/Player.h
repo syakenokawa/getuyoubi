@@ -1,21 +1,13 @@
 #pragma once
 #include"Character.h"
-#include<iostream>
-
-class Player:public Character
+class Player :public Character
 {
-private:
-	int chpiceNumber;
-	string
 public:
-	Player(int Hp, int Akt, int Dfe, int Avo);
-	int chouce();
-	
+
+	Player();
 
 	
-
-
-
+	void Action(Character& target);
 
 };
 
