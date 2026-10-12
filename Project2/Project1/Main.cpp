@@ -8,5 +8,33 @@ int main(void)
 	cout << character.Getname() << endl;
 	character .Attack();
 
+	string playerName;
+	string enemyName;
+	string bossName;
+
+	cout << "–¼‘O‚ð“ü—Í‚µ‚Ä‚­‚¾‚³‚¢" << endl;
+	cout << "—EŽÒ" << endl;
+	cin >> playerName;
+	cout << "“G" << endl;
+	cin >> enemyNmae;
+	cout << "ƒ{ƒX" << endl;
+	cin >> bossName;
+
+
+	Player Attack();
+	enemy Attack();
+	booss Attack();
+
+
+
+
+
+
+
+
+
+
+
+
 	return 0;
 }
