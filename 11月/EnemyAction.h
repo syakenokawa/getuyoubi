@@ -1,4 +1,6 @@
 #pragma once
-class EnemyAction
-{};
-
+enum class EnemyAction
+{
+    Attack,
+    Defense
+};

@@ -1,10 +1,14 @@
 #include<iostream>
+#include "Game.h"
 
-int main(void)
+int main()
 {
-	
-}
+    Game game;
 
+    game.Run();
+
+    return 0;
+}
 
 
 

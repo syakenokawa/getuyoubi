@@ -3,30 +3,16 @@
 
 namespace Damege
 {
-	int CacylatePlayerDame(bool enemyDefendine);
+
+	void ApplyDamage(int& targetHp, int damage)
+		targetHp -= damage;
+
+	if (action == Config::PLAYER_ATTACK_INPUT)
 	{
-		if
+		cout << "プレイヤーの攻撃！" << endl;
 
+		Damage::ApplyDamage(enemyHP, Config::PLAYER_ATTACK_DAMAGE);
 	}
-
-
-
-
-
-
-
-	
-int CalculatePlayerDame(bool playerDefendling);
-
-
-
-
-
-
-
-
-
-
 
 
 

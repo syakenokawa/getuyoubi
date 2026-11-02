@@ -1,48 +1,19 @@
 #pragma once
-#include"Character.h"
-#include"player.h"
-#include<limits>
-#include<iostream>
-Player::player() : Character(Config::INTAL_HP) {}
 
-PlayerAction Player::SelectAction() const
+#include "Character.h"
+#include "Config.h"
+
+enum class PlayerAction
 {
-	int playerInput;
+    Attack,
+    Defense,
+    Heal
+};
 
-	while (true)
-	{
-		cout << "===========Select Action=====" << endl;
-		cout << Config::PLAYER_ATTACK_INPUT << ":UŒ‚" << endl;
-		cout << Config::PLAYER_ATTACK_INPUT << ":–hŒä" << endl;
-		cout << Conflig::PLAYER_ATTCK_INPU << ":‰ñ•œ" << endl;
-		cin >> playerInput;
+class Player : public Character
+{
+public:
+    Player();
 
-		if (playerInput == Cobfig::PLAYER_ATTACK_INPUT)
-		{
-
-		}
-
-
-
-
-
-
-
-
-
-
-
-
-	}
-
-
-
-}
-
-
-
-
-
-
-
-
+    PlayerAction SelectAction() const;
+};

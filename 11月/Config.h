@@ -11,8 +11,8 @@ namespace Config
 	constexpr int PLAYER_ATTACK_DAMAGE = 30;
 	constexpr int PLAYER_ATTACK_DAMAGE = 10;
 
-	constexpr int ENEMY_ATTACK_DAMEGE = 
-    constexpr int ENEMY_ATTACK_DAMEGE = 
+	constexpr int ENEMY_ATTACK_DAMEGE = 20;
+	constexpr int ENEMY_ATTACK_DAMEGE = 20;
 
 
 
