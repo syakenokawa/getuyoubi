@@ -3,44 +3,52 @@
 #include <limits>
 using namespace std;
 
-Player::Player() : Character(Config::INITIAL_HP)
-{
-}
+
+
+//ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+Player::Player(const string& name) : Character(Config::INTIAL_HP), Name(name) {}
+
+//ƒvƒŒƒCƒ„[‚Ìs“®‚ğ‘I‘ğ‚·‚é
 
 PlayerAction Player::SelectAction() const
 {
-    int playerInput;
+	//“ü—Í
+	int playerInput;
 
-    while (true)
-    {
-        cout << "=========== Select Action ===========" << endl;
-        cout << Config::PLAYER_ATTACK_INPUT << ": æ”»æ’ƒ" << endl;
-        cout << Config::PLAYER_DEFENSE_INPUT << ": é˜²å¾¡" << endl;
-        cout << Config::PLAYER_HEAL_INPUT << ": å›å¾©" << endl;
+	while (true)
+	{
+		cout << "=======Select Action=======" << endl;
+		cout << Config::PLAYER_ATTACK_INPUT << ":UŒ‚" << endl;
+		cout << Config::PLAYER_DEFENSE_INPUT << ":–hŒä" << endl;
+		cout << Config::PLAYER_HEAL_INPUT << ":‰ñ•œ" << endl;
 
-        cin >> playerInput;
+		cin >> playerInput;
 
-        if (playerInput == Config::PLAYER_ATTACK_INPUT)
-        {
-            return PlayerAction::Attack;
-        }
-        else if (playerInput == Config::PLAYER_DEFENSE_INPUT)
-        {
-            return PlayerAction::Defense;
-        }
-        else if (playerInput == Config::PLAYER_HEAL_INPUT)
-        {
-            return PlayerAction::Heal;
-        }
-        else
-        {
-            cout << "1ï½3ã‚’å…¥åŠ›ã—ã¦ãã ã•ã„" << endl;
+		if (playerInput == Config::PLAYER_ATTACK_INPUT)
+		{
+			return PlayerAction::Attack;
+		}
+		if (playerInput == Config::PLAYER_DEFENSE_INPUT)
+		{
+			return PlayerAction::Defense;
+		}
+		if (playerInput == Config::PLAYER_HEAL_INPUT)
+		{
+			return PlayerAction::Heal;
+		}
+		cout << "“ü—Í‚ª³‚µ‚­‚ ‚è‚Ü‚¹‚ñBÄ“x“ü—Í‚µ‚Ä‚­‚¾‚³‚¢B" << endl;
+		cin.clear();
 
-            cin.clear();
-            cin.ignore(numeric_limits<streamsize>::max(), '\n');
-        }
-    }
+	}
+
 }
 
+void Player::Heal(int amount)
+{
+	RecoverHp(amount);
+}
 
-
+std::string Player::GetName() const
+{
+	return Name;
+}

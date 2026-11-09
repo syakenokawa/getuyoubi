@@ -3,21 +3,21 @@
 using namespace std;
 class Character
 {
+private:
+	int hp;
+protected:
+
+	void RecoverHp(int amount);
 public:
 	Character(int initialHp);
 
-	void showStatus(const string& name)const;
+	void ShowStatus(const std::string& name) const;
 
 	void TakeDamage(int damage);
-
-	void RecoverHp(int amount);
-
-
-
-
-
-
+	int GetHp() const;
 
 
 };
+
+
 

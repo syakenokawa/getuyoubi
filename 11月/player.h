@@ -3,17 +3,16 @@
 #include "Character.h"
 #include "Config.h"
 
-enum class PlayerAction
+class Player :public Character
 {
-    Attack,
-    Defense,
-    Heal
-};
-
-class Player : public Character
-{
+private:
+	string Name;
 public:
-    Player();
+	Player(const string& name);
+	PlayerAction SelectAction() const;
+	void Heal(int amount);
 
-    PlayerAction SelectAction() const;
+	std::string GetName() const { return Name; }
+
 };
+

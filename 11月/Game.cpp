@@ -1,67 +1,111 @@
 #include "Game.h"
-#include "PlayerAction.h"
-#include "Config.h"
-#include "Damaege.h"
-#include <iostream>
+#include"Damage.h"
+#include"Config.h"
+
+#include<iostream>
 using namespace std;
 
-Game::Game()
+void Game::ShowStatus(const Player& player, const Enemy& enemy) const
 {
+	cout << "���݂̏��" << endl;
+
+	player.ShowStatus(player.GetName());
+	enemy.ShowStatus(enemy.GetName());
+}
+
+void Game::ProcessPlayerAction(PlayerAction playerAction, EnemyAction enemyAction)
+{
+	switch (playerAction)
+	{
+	case PlayerAction::Attack:
+		if (enemyAction == EnemyAction::Defense)
+		{
+			Damage::CalculatePlayerDamage(true);
+		}
+		else
+		{
+			Damage::CalculatePlayerDamage(false);
+		}
+		break;
+	case PlayerAction::Defense:
+		break;
+	case PlayerAction::Heal:
+		player.Heal(Config::PALYER_HEAL_AMOUNT);
+		break;
+	default:
+		break;
+	}
+}
+
+void Game::ProcessEnemyAction(EnemyAction enemyAction, PlayerAction playerAction)
+{
+	switch (playerAction)
+	{
+	case PlayerAction::Attack:
+		cout << "Player'S Attack" << endl;
+		if (enemyAction == EnemyAction::Defense)
+		{
+			Damage::CalculatePlayerDamage(true);
+		}
+		else
+		{
+			Damage::CalculatePlayerDamage(false);
+		}
+	case PlayerAction::Defense:
+		break;
+	default:
+		break;
+	}
+}
+
+void Game::ProcessEnemyAction(EnemyAction enemyAction, PlayerAction playerAction)
+{
+	switch (enemyAction)
+	{
+	case EnemyAction::Attack:
+		if (playerAction == PlayerAction::Defense)
+		{
+			Damage::CalculateEnemyDamage(true);
+		}
+		else
+		{
+			Damage::CalculateEnemyDamage(false);
+		}
+		break;
+	case EnemyAction::Defense:
+		break;
+	default:
+		break;
+	}
+}
+
+void Game::CheckResult() const
+{
+	if (player.GetHp() <= 0)
+	{
+		cout << "You Lose!" << endl;
+	}
+	else if (enemy.GetHp() <= 0)
+	{
+		cout << "You Win!" << endl;
+	}
 }
 
 void Game::Run()
 {
-    cout << "===== コマンドバトル開始 =====" << endl;
-
-    while (player.GetHp() > 0 && enemy.GetHp() > 0)
-    {
-        player.ShowStatus("プレイヤー");
-        enemy.ShowStatus("敵");
-
-        // プレイヤーの行動を選択
-        PlayerAction action = player.SelectAction();
-
-        // プレイヤーの攻撃
-        if (action == PlayerAction::Attack)
-        {
-            cout << "プレイヤーの攻撃！" << endl;
-
-            enemy.TakeDamage(Config::PLAYER_ATTACK_DAMAGE);
-
-            cout << "敵は防御した！" << endl;
-        }
-        // プレイヤーの防御
-        else if (action == PlayerAction::Defense)
-        {
-            cout << "プレイヤーは防御した！" << endl;
-            cout << "敵の攻撃！" << endl;
-
-            player.TakeDamage(Config::PLAYER_DEFENSE_DAMAGE);
-        }
-        // プレイヤーの回復
-        else if (action == PlayerAction::Heal)
-        {
-            cout << "プレイヤーは回復した！" << endl;
-
-            player.RecoverHp(Config::PLAYER_HEAL_AMOUNT);
-
-            cout << "敵の攻撃！" << endl;
-
-            player.TakeDamage(Config::ENEMY_ATTACK_DAMAGE);
-        }
-    }
-
-    cout << "===== ゲーム終了 =====" << endl;
-
-    player.ShowStatus("プレイヤー");
-    enemy.ShowStatus("敵");
-
-    if (player.GetHp() <= 0)
-    {
-        cout << "プレイヤーの負け！" << endl;
-    }
-    else
-    {
-        cout << "プレイヤーの勝ち！" << endl;
-    }
+	//�Q�[���J�n
+	cout << "�Q�[���X�^�[�g�I" << endl;
+	while (true)
+	{
+		ShowStatus(player, enemy);
+		PlayerAction playerAction = player.SelectAction();
+		EnemyAction enemyAction = enemy.DecideAction();
+		ProcessPlayerAction(playerAction, enemyAction);
+		ProcessEnemyAction(enemyAction, playerAction);
+		CheckResult();
+		if (player.GetHp() <= 0 || enemy.GetHp() <= 0)
+		{
+			break;
+		}
+	}
 }

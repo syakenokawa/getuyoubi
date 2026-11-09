@@ -1,15 +1,8 @@
 
-
 #pragma once
-
-#include "Player.h"
-
-class PlayerActionManager
+enum class PlayerAction
 {
-public:
-    static void Execute(
-        PlayerAction action,
-        Player& player,
-        Character& enemy
-    );
+	Attack,
+	Defense,
+	Heal
 };

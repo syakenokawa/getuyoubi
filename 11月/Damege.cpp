@@ -1,20 +1,27 @@
 #include "Damege.h"
 #include"Config.h"
 
-namespace Damege
+namespace Damage
 {
-
-	void ApplyDamage(int& targetHp, int damage)
-		targetHp -= damage;
-
-	if (action == Config::PLAYER_ATTACK_INPUT)
+	int CalculatePlayerDamage(bool enemyDefending)
 	{
-		cout << "プレイヤーの攻撃！" << endl;
+		if (enemyDefending)
+		{
+			return Config::PLAYER_ATTACK_REDUCED_DAMAGE;
+		}
 
-		Damage::ApplyDamage(enemyHP, Config::PLAYER_ATTACK_DAMAGE);
+		return Config::PLAYER_ATTACK_DAMAGE;
+
 	}
 
+	int CalculateEnemyDamage(bool playerDefending)
+	{
+		if (playerDefending)
+		{
+			return Config::ENEMY_ATTACK_REDUCED_DAMAGE
+		}
 
-
+		return Config::ENEMY_ATTACK_DAMAGE;
+	}
 
 }
