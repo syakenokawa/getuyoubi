@@ -18,7 +18,7 @@ private:
 	bool IsGameClear() const;
 
 public:
-	//コナン君がいつも叫んでいる人
+
 	void Run();
 };
 
